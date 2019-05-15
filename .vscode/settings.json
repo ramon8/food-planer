@@ -1,0 +1,7 @@
+{
+    "html.format.wrapAttributes": "force-aligned",
+    "workbench.colorCustomizations": {
+        "titleBar.activeBackground": "#a63dc6"
+    },
+    "editor.formatOnSave": true
+}
