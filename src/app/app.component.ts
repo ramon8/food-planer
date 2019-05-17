@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 import { environment } from '@env/environment';
-import { Language } from './_models';
+import { Language } from '@app/_models';
 
 @Component({
     selector: 'app-root',

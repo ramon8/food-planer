@@ -26,13 +26,11 @@
 
 .container {
     .row {
-        [class*="col-"] {
+        [class*="col"] {
             height: 50px;
         }
         .col {
-            &-xs {
-                background-color: map-get($year-color, 2019-living-coral);
-            }
+            background-color: map-get($year-color, 2019-living-coral);
             &-sm {
                 background-color: map-get($year-color, 2018-ultra-violet);
             }
