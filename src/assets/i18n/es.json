@@ -1,0 +1,7 @@
+{
+    "common": {
+        "header": "Responsive color change",
+        "title": "Welcome to angular-bootstrap-seed!",
+        "bootstrap-grid": "Bootstrap grid"
+    }
+}

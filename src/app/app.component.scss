@@ -1,0 +1,50 @@
+@import "~stylesheets/modules/_all.scss";
+
+.media-example {
+    @include size(100%, 50px);
+
+    @include screen(xs) {
+        background-color: map-get($year-color, 2019-living-coral);
+    }
+
+    @include screen(sm) {
+        background-color: map-get($year-color, 2018-ultra-violet);
+    }
+
+    @include screen(md) {
+        background-color: map-get($year-color, 2017-greenery);
+    }
+
+    @include screen(lg) {
+        background-color: map-get($year-color, 2016-serenity);
+    }
+
+    @include screen(xl) {
+        background-color: map-get($year-color, 2011-honeysucle);
+    }
+}
+
+.container {
+    .row {
+        [class*="col-"] {
+            height: 50px;
+        }
+        .col {
+            &-xs {
+                background-color: map-get($year-color, 2019-living-coral);
+            }
+            &-sm {
+                background-color: map-get($year-color, 2018-ultra-violet);
+            }
+            &-md {
+                background-color: map-get($year-color, 2017-greenery);
+            }
+            &-lg {
+                background-color: map-get($year-color, 2016-serenity);
+            }
+            &-xl {
+                background-color: map-get($year-color, 2011-honeysucle);
+            }
+        }
+    }
+}

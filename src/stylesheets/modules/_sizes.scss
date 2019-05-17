@@ -1,0 +1,19 @@
+// breakpoints
+$break-xs: 0;
+$break-sm: 576px;
+$break-md: 768px;
+$break-lg: 992px;
+$break-xl: 1200px;
+
+/* define grid breakpoints
+ *
+ * example usage:
+ * map-get($grid-breakpoints, sm)
+ */
+$grid-breakpoints: (
+    xs: $break-xs,
+    sm: $break-sm,
+    md: $break-md,
+    lg: $break-lg,
+    xl: $break-xl
+);

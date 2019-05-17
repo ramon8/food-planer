@@ -1,0 +1,6 @@
+@import "~stylesheets/modules/_sizes.scss";
+
+// gets the vw value giving a screen size
+@function get_vw($pxValue, $vpWidth: $break-xl) {
+    @return ($pxValue/$vpWidth) * 100vw;
+}

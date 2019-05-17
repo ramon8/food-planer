@@ -1,0 +1,57 @@
+@import "~stylesheets/modules/_sizes.scss";
+
+/* text setter
+ *
+ * example usage
+ * @include text(16px, 19px, 600);
+ * @include text($weight: 800, $size: 12px);
+ */
+@mixin text($size: null, $lineHeight: null, $weight: null) {
+    // If the $size argument is not empty, then output the argument
+    @if $size != null {
+        font-size: $size;
+    }
+
+    // If the $lineHeight argument is not empty, then output the argument
+    @if $lineHeight != null {
+        line-height: $lineHeight;
+    }
+
+    // If the $weight argument is not empty, then output the argument
+    @if $weight != null {
+        font-weight: $weight;
+    }
+}
+
+// size setter
+@mixin size($width, $height: $width) {
+    width: $width;
+    height: $height;
+}
+
+// media-queries
+@mixin screen($size) {
+    @if $size == "xs" {
+        @media only screen and (max-width: $break-sm - 1) {
+            @content;
+        }
+    } @else if $size == "sm" {
+        @media only screen and (min-width: $break-sm) and (max-width: $break-md - 1) {
+            @content;
+        }
+    } @else if $size == "md" {
+        @media only screen and (min-width: $break-md) and (max-width: $break-lg - 1) {
+            @content;
+        }
+    } @else if $size == "lg" {
+        @media only screen and (min-width: $break-lg) and (max-width: $break-xl - 1) {
+            @content;
+        }
+    } @else if $size == "xl" {
+        @media only screen and (min-width: $break-xl) {
+            @content;
+        }
+    } @else {
+        @content;
+    }
+}
