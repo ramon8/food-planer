@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 import { environment } from '@env/environment';
@@ -9,7 +9,7 @@ import { Language } from '@app/_models';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
     constructor(private translateService: TranslateService) {
 
@@ -22,4 +22,6 @@ export class AppComponent {
         // the lang to use, if the lang isn't available, it will use the current loader to get them
         this.translateService.use(environment.defaultLanguage.code);
     }
+
+    ngOnInit(): void { }
 }
