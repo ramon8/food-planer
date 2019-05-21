@@ -10,10 +10,13 @@ import { CoreModule } from './core/core.module';
 
 // components
 import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SidenavComponent } from './core/components/sidenav/sidenav.component';
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        SidenavComponent
     ],
     imports: [
         BrowserModule,
@@ -21,7 +24,8 @@ import { AppComponent } from './app.component';
         AppRoutingModule,
         NgbModule,
         SharedModule,
-        CoreModule
+        CoreModule,
+        BrowserAnimationsModule,
     ],
     providers: [],
     bootstrap: [AppComponent]

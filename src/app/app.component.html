@@ -35,4 +35,15 @@
     </div>
 </div>
 
+<!-- sidenav -->
+<app-sidenav #sidenav>
+    <button (click)="sidenav.toggle()">Toggle</button>
+    <button (click)="sidenav.open()">open</button>
+    <button (click)="sidenav.close()">close</button>
+</app-sidenav>
+
+<button (click)="sidenav.toggle()">Toggle</button>
+<button (click)="sidenav.open()">open</button>
+<button (click)="sidenav.close()">close</button>
+
 <router-outlet></router-outlet>
