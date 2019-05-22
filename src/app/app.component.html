@@ -38,13 +38,21 @@
 <!-- sidenav -->
 <app-sidenav #sidenav
              [hasBackdrop]="true">
-    <button (click)="sidenav.toggle()">Toggle</button>
-    <button (click)="sidenav.open()">open</button>
-    <button (click)="sidenav.close()">close</button>
+    <ng-container *ngTemplateOutlet="testSidenav"></ng-container>
 </app-sidenav>
 
-<button (click)="sidenav.toggle()">Toggle</button>
-<button (click)="sidenav.open()">open</button>
-<button (click)="sidenav.close()">close</button>
+<ng-container *ngTemplateOutlet="testSidenav"></ng-container>
 
 <router-outlet></router-outlet>
+
+<!-- template for test sidenav -->
+<ng-template #testSidenav>
+    <div class="text-align-center margin-top">
+        <h4>
+            {{ 'common.test_sidenav' | translate }}
+        </h4>
+        <button (click)="sidenav.toggle()">Toggle</button>
+        <button (click)="sidenav.open()">open</button>
+        <button (click)="sidenav.close()">close</button>
+    </div>
+</ng-template>

@@ -2,6 +2,7 @@
     "common": {
         "header": "Responsive color change",
         "title": "Welcome to angular-bootstrap-seed!",
-        "bootstrap-grid": "Bootstrap grid"
+        "bootstrap-grid": "Bootstrap grid",
+        "test_sidenav": "Test Sidenav"
     }
 }
