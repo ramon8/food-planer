@@ -14,7 +14,8 @@ import {
     animations: [
         trigger('toggleDrawer', [
             state('closed', style({
-                transform: 'translateX(0)'
+                transform: 'translateX(0)',
+                'box-shadow': '0px 3px 6px 1px rgba(0, 0, 0, 0.6)'
             })),
             state('opened', style({
                 transform: 'translateX(80vw)'
@@ -25,13 +26,11 @@ import {
 })
 export class SidenavComponent implements OnInit {
 
-    // TODO: clean CodeNode, refactor, prettyfy
-
-    toggleDrawer: 'opened' | 'closed' = 'closed';
+    private state: 'opened' | 'closed' = 'closed';
 
     // binds the animation to the host component
-    @HostBinding('@toggleDrawer') get toggleDrawer1(): string {
-        return this.toggleDrawer === 'closed' ? 'opened' : 'closed';
+    @HostBinding('@toggleDrawer') get getToggleDrawer(): string {
+        return this.state === 'closed' ? 'opened' : 'closed';
     }
 
     constructor() { }
@@ -41,17 +40,17 @@ export class SidenavComponent implements OnInit {
 
     // toggle drawer
     toggle(): void {
-        this.toggleDrawer = this.toggleDrawer === 'closed' ? 'opened' : 'closed';
+        this.state = this.state === 'closed' ? 'opened' : 'closed';
     }
 
     // opens drawer
     open(): void {
-        this.toggleDrawer = 'opened';
+        this.state = 'opened';
     }
 
     // closes drawer
     close(): void {
-        this.toggleDrawer = 'closed';
+        this.state = 'closed';
     }
 
 }

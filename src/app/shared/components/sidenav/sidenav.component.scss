@@ -1,4 +1,5 @@
 // TODO: refactor, global variables
+@import "~stylesheets/modules/_all.scss";
 
 @mixin setCommon($left: null) {
     top: 0;
@@ -12,15 +13,13 @@
 
 :host {
     position: fixed;
-    width: 80vw;
-    background-color: white;
-    box-shadow: 0px 3px 6px 1px rgba(0, 0, 0, 0.6);
-    // transition: transform 300ms ease-in-out;
+    width: $sidenav-width;
+    background-color: $white;
     @include setCommon();
 
     .backdrop {
         position: absolute;
-        background-color: rgba(0, 0, 0, 0.6);
+        background-color: $backdrop;
         @include setCommon(left);
     }
 }
