@@ -4,11 +4,8 @@ import {
     state,
     style,
     transition,
-    animate,
-    keyframes,
-    group
+    animate
 } from '@angular/animations';
-import { CodeNode } from 'source-list-map';
 
 @Component({
     selector: 'app-sidenav',

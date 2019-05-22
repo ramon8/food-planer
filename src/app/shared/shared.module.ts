@@ -6,9 +6,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 // modules
 
 // components
+import { SidenavComponent } from './components/sidenav/sidenav.component';
 
 @NgModule({
     declarations: [
+        SidenavComponent
     ],
     entryComponents: [
     ],
@@ -20,6 +22,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     exports: [
         CommonModule,
         TranslateModule,
+        SidenavComponent
     ]
 })
 export class SharedModule { }
