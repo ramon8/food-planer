@@ -36,7 +36,8 @@
 </div>
 
 <!-- sidenav -->
-<app-sidenav #sidenav>
+<app-sidenav #sidenav
+             [hasBackdrop]="true">
     <button (click)="sidenav.toggle()">Toggle</button>
     <button (click)="sidenav.open()">open</button>
     <button (click)="sidenav.close()">close</button>
