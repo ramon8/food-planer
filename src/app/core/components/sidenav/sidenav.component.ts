@@ -17,11 +17,9 @@ import { CodeNode } from 'source-list-map';
     animations: [
         trigger('toggleDrawer', [
             state('closed', style({
-                'background-color': 'pink',
                 transform: 'translateX(0)'
             })),
             state('opened', style({
-                'background-color': 'cyan',
                 transform: 'translateX(80vw)'
             })),
             transition('closed <=> opened', animate(300))
@@ -32,11 +30,10 @@ export class SidenavComponent implements OnInit {
 
     // TODO: clean CodeNode, refactor, prettyfy
 
-    isOpen: boolean = false;
     toggleDrawer: 'opened' | 'closed' = 'closed';
 
+    // binds the animation to the host component
     @HostBinding('@toggleDrawer') get toggleDrawer1(): string {
-        // this.toggle();
         return this.toggleDrawer === 'closed' ? 'opened' : 'closed';
     }
 
@@ -45,18 +42,18 @@ export class SidenavComponent implements OnInit {
     ngOnInit(): void {
     }
 
+    // toggle drawer
     toggle(): void {
-        // this.state = this.state === 'closed' ? 'opened' : 'closed';
         this.toggleDrawer = this.toggleDrawer === 'closed' ? 'opened' : 'closed';
     }
 
+    // opens drawer
     open(): void {
-        // this.state = 'opened';
         this.toggleDrawer = 'opened';
     }
 
+    // closes drawer
     close(): void {
-        // this.state = 'closed';
         this.toggleDrawer = 'closed';
     }
 
