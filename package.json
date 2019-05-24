@@ -8,6 +8,8 @@
         "build": "ng build --aot",
         "prebuild:prod": "npm run lint",
         "build:prod": "ng build --prod --aot --subresourceIntegrity",
+        "clean": "rm package-lock.json && rm -rf node_modules/",
+        "clean:install": "npm run clean && npm install",
         "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e"
