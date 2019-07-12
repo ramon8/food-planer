@@ -45,4 +45,36 @@
             }
         }
     }
+    .row.browser-specific {
+        // EXPERIMENT
+        p {
+            text-align: center;
+            font-weight: bold;
+            height: 50px;
+            background-color: pink;
+            &::after {
+                content: attr(data-text) "Chrome";
+            }
+        }
+
+        @supports (-moz-appearance: none) {
+            p {
+                color: white;
+                background-color: blue;
+                &::after {
+                    content: attr(data-text) "FireFox";
+                }
+            }
+        }
+
+        @supports (-ms-ime-align: auto) {
+            p {
+                color: white;
+                background-color: red;
+                &::after {
+                    content: attr(data-text) "Edge";
+                }
+            }
+        }
+    }
 }
