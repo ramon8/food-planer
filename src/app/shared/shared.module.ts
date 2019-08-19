@@ -7,10 +7,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 // components
 import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { HidePipe } from '@app/_pipes/hide.pipe';
 
 @NgModule({
     declarations: [
-        SidenavComponent
+        SidenavComponent,
+        HidePipe
     ],
     entryComponents: [
     ],
@@ -22,7 +24,8 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
     exports: [
         CommonModule,
         TranslateModule,
-        SidenavComponent
+        SidenavComponent,
+        HidePipe
     ]
 })
 export class SharedModule { }
