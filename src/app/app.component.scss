@@ -3,24 +3,44 @@
 .media-example {
     @include size(100%, 50px);
 
+    @include screen(min) {
+        background-color: map-get($responsive-colors, min);
+    }
+
     @include screen(xs) {
-        background-color: map-get($year-color, 2019-living-coral);
+        background-color: map-get($responsive-colors, xs);
     }
 
     @include screen(sm) {
-        background-color: map-get($year-color, 2018-ultra-violet);
+        background-color: map-get($responsive-colors, sm);
     }
 
     @include screen(md) {
-        background-color: map-get($year-color, 2017-greenery);
+        background-color: map-get($responsive-colors, md);
     }
 
     @include screen(lg) {
-        background-color: map-get($year-color, 2016-serenity);
+        background-color: map-get($responsive-colors, lg);
     }
 
     @include screen(xl) {
-        background-color: map-get($year-color, 2011-honeysucle);
+        background-color: map-get($responsive-colors, xl);
+    }
+}
+
+.media-example-2 {
+    @include size(100%, 50px);
+
+    @include media-breakpoint-down(xs) {
+        background-color: map-get($responsive-colors, min);
+    }
+
+    @include media-breakpoint-between(xs, xl) {
+        background-color: map-get($year-color, 2014-radiand-orchid);
+    }
+
+    @include media-breakpoint-up(xl) {
+        background-color: map-get($responsive-colors, xl);
     }
 }
 
@@ -30,23 +50,24 @@
             height: 50px;
         }
         .col {
-            background-color: map-get($year-color, 2019-living-coral);
+            background-color: map-get($responsive-colors, min);
             &-sm {
-                background-color: map-get($year-color, 2018-ultra-violet);
+                background-color: map-get($responsive-colors, xs);
             }
             &-md {
-                background-color: map-get($year-color, 2017-greenery);
+                background-color: map-get($responsive-colors, sm);
             }
             &-lg {
-                background-color: map-get($year-color, 2016-serenity);
+                background-color: map-get($responsive-colors, md);
             }
             &-xl {
-                background-color: map-get($year-color, 2011-honeysucle);
+                background-color: map-get($responsive-colors, lg);
             }
         }
     }
+
+    // displays browser with css rules
     .row.browser-specific {
-        // EXPERIMENT
         p {
             text-align: center;
             font-weight: bold;

@@ -1,10 +1,21 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <nav class="navbar navbar-dark bg-dark">
     <a class="navbar-brand"
-       href="#">Navbar</a>
+       href="#">
+        Navbar
+    </a>
 </nav>
 
+<!-- example header with old media queries -->
 <div class="media-example flex-align">
+    <h3>
+        {{ 'common.header' | translate }}
+    </h3>
+</div>
+
+<!-- example header with new media queries -->
+
+<div class="media-example-2 flex-align">
     <h3>
         {{ 'common.header' | translate }}
     </h3>
@@ -22,21 +33,25 @@
 <h3 class="text-align-center">{{ 'common.bootstrap-grid' | translate }}</h3>
 <div class="container">
     <div class="row">
-        <div class="col">
+        <div class="col flex-align">
+            col-min
         </div>
-        <div class="col-sm">
+        <div class="col-sm flex-align">
+            col-sm
         </div>
-        <div class="col-md">
+        <div class="col-md flex-align">
+            col-md
         </div>
-        <div class="col-lg">
+        <div class="col-lg flex-align">
+            col-lg
         </div>
-        <div class="col-xl">
+        <div class="col-xl flex-align">
+            col-xl
         </div>
     </div>
     <div class="row browser-specific">
-        <p class="col"
+        <p class="col flex-align"
            data-text="This browser is detected by CSS as: ">
-
         </p>
     </div>
 </div>
