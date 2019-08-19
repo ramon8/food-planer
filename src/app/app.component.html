@@ -4,6 +4,29 @@
        href="#">
         Navbar
     </a>
+
+    <!-- change language dropdown -->
+    <div class="d-inline-block"
+         ngbDropdown>
+        <button class="btn btn-primary"
+                id="languageDropdown"
+                ngbDropdownToggle>
+            {{ currentLanguage.name }} ({{ currentLanguage.code }})
+        </button>
+        <div ngbDropdownMenu
+             aria-labelledby="languageDropdown">
+            <button *ngFor="let lang of languages"
+                    (click)="onLangClick(lang)"
+                    ngbDropdownItem>
+                {{ lang.name }} ({{ lang.code }})
+            </button>
+        </div>
+    </div>
+
+    <!-- <button *ngFor="let lang of languages"
+            (click)="onLangClick(lang)">
+        {{ lang.name }}
+    </button> -->
 </nav>
 
 <!-- example header with old media queries -->
