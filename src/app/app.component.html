@@ -17,7 +17,7 @@
 
 <div class="media-example-2 flex-align">
     <h3>
-        {{ 'common.header' | translate }}
+        {{ 'common.vw_size' | translate:{value: vwSize} }}
     </h3>
 </div>
 
@@ -55,7 +55,8 @@
     </div>
     <div class="row browser-specific">
         <p class="col flex-align"
-           data-text="This browser is detected by CSS as: ">
+           data-text="">
+            {{ 'common.browser_detected' | translate }}&nbsp;
         </p>
     </div>
 </div>

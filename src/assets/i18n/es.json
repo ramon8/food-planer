@@ -1,7 +1,10 @@
 {
     "common": {
-        "header": "Responsive color change",
-        "title": "Welcome to angular-bootstrap-seed!",
-        "bootstrap-grid": "Bootstrap grid"
+        "header": "Cambio de color responsive",
+        "title": "Bienvenido a angular-bootstrap-seed!",
+        "bootstrap-grid": "Bootstrap grid",
+        "test_sidenav": "Prueba de Sidenav",
+        "vw_size": "Tamaño de viewport: {{ value }}px",
+        "browser_detected": "Este navegador es detectado por CSS como:"
     }
 }
