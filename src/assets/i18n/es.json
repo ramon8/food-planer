@@ -5,6 +5,9 @@
         "bootstrap-grid": "Bootstrap grid",
         "test_sidenav": "Prueba de Sidenav",
         "vw_size": "Tamaño de viewport: {{ value }}px",
-        "browser_detected": "Este navegador es detectado por CSS como:"
+        "browser_detected": "Este navegador es detectado por CSS como:",
+        "toggle": "Abrir/Cerrar",
+        "open": "Abrir",
+        "close": "Cerrar"
     }
 }

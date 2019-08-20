@@ -100,8 +100,26 @@
         <h4>
             {{ 'common.test_sidenav' | translate }}
         </h4>
-        <button (click)="sidenav.toggle()">Toggle</button>
-        <button (click)="sidenav.open()">Open</button>
-        <button (click)="sidenav.close()">Close</button>
+
+        <!-- button group -->
+        <div class="btn-group"
+             role="group"
+             aria-label="Basic example">
+            <button type="button"
+                    class="btn btn-secondary"
+                    (click)="sidenav.toggle()">
+                {{ 'common.toggle' | translate }}
+            </button>
+            <button type="button"
+                    class="btn btn-secondary"
+                    (click)="sidenav.open()">
+                {{ 'common.open' | translate }}
+            </button>
+            <button type="button"
+                    class="btn btn-secondary"
+                    (click)="sidenav.close()">
+                {{ 'common.close' | translate }}
+            </button>
+        </div>
     </div>
 </ng-template>
