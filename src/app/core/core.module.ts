@@ -8,6 +8,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { SharedModule } from '@app/shared/shared.module';
 import { AppRoutingModule } from '@app/app-routing.module';
 import { HttpErrorsInterceptor } from './errors/http-errors.interceptor';
+import { CustomErrorPageComponent } from './components/custom-error-page/custom-error-page.component';
 
 // components
 
@@ -18,6 +19,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
 
 @NgModule({
     declarations: [
+        CustomErrorPageComponent,
     ],
     imports: [
         SharedModule,
