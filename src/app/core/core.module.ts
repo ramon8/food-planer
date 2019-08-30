@@ -13,8 +13,9 @@ import { CustomErrorPageComponent } from './components/custom-error-page/custom-
 // components
 
 // required for AOT (ahead of time) compilation in your project
+// prefix and suffix are in case a different base-href is used
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
-    return new TranslateHttpLoader(http);
+    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 @NgModule({
