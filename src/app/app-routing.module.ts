@@ -6,7 +6,9 @@ import { CustomErrorPageComponent } from './core/components/custom-error-page/cu
 const routes: Routes = [
     { path: '', redirectTo: '/main', pathMatch: 'full' },
     { path: 'main', loadChildren: './main/main.module#MainModule' },
+    { path: 'form', loadChildren: './form/form.module#FormModule' },
     { path: '**', component: CustomErrorPageComponent },
+    // { path: 'form', loadChildren: () => import('./form/form.module').then(m => m.FormModule) },
     // { path: 'main', loadChildren: () => import('./main/main.module').then(m => m.MainModule) }
 ];
 

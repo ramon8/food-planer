@@ -1,0 +1,86 @@
+<form [formGroup]="form"
+      (ngSubmit)="onSubmit()">
+
+    <!-- questions -->
+    <div id="questions"
+         formArrayName="questions">
+        <div *ngFor="let question of getQuestionsControls(); let i=index"
+             [formGroupName]="i">
+            <h4 class="">{{question.controls.title.value}}</h4>
+            <p *ngIf="questions[i].subtitle"
+               class="">{{questions[i].subtitle}}</p>
+
+            <!-- answer -->
+            <!-- formArrayName="answer" -->
+            <!-- [formControlName]="getAnswersControls(i, questions[i].textBoxes[0].status === 'CHECKBOX' ? j : null)" -->
+            <!-- <div id="answers">
+                <div *ngFor="let item of questions[i].textBoxes; let j=index"
+                     style="display:inline-block;"
+                     class="form-group">
+                    <span>{{i}}-{{j}}</span>
+                    <fieldset class="">
+
+                        <legend class=""></legend>
+                        <input type="{{questions[i].textBoxes[j].type}}"
+                               name="answer-{{i}}"
+                               id="answer-{{i}}-{{j}}"
+                               [formControl]="getAnswersControls(i, questions[i].textBoxes[0].status === 'CHECKBOX' ? j : 0)"
+                               value="{{questions[i].textBoxes[j].title}}">
+                        <label for="{{questions[i].textBoxes[j].title}}"
+                               class="">
+                            {{questions[i].textBoxes[j].title}}
+                        </label>
+                    </fieldset>
+                </div>
+            </div> -->
+
+
+            <!-- <div id="answers">
+                <div *ngFor="let answer of getAnswersControls(i); let j=index"
+                     formArrayName="answer"
+                     style="display:inline-block;"
+                     class="form-group">
+                    <span>{{i}}-{{j}}</span>
+                    <fieldset class="">
+
+                        <legend class=""></legend>
+                        <input type="{{questions[i].textBoxes[j].type}}"
+                               name="answer-{{i}}"
+                               id="answer-{{i}}-{{j}}"
+                               [formControlName]="j"
+                               value="{{questions[i].textBoxes[j].title}}">
+                        <label for="{{questions[i].textBoxes[j].title}}"
+                               class="">
+                            {{questions[i].textBoxes[j].title}}
+                        </label>
+                    </fieldset>
+                </div>
+            </div> -->
+
+
+        </div>
+
+    </div>
+
+    <!-- more information -->
+    <div id="more-information">
+        <fieldset class="">
+            <legend class="">Más información</legend>
+            <label for=""
+                   class="">Más información</label>
+            <textarea class=""
+                      placeholder="Si tienes más información sobre el trabajo a realizar, añádelo aquí para poder calcular mejor el presupuesto estimado."
+                      formControlName="textArea"
+                      rows="4"
+                      cols="50">
+            </textarea>
+        </fieldset>
+    </div>
+
+    <!-- button -->
+    <div class="">
+        <button class="">
+            Encontrar profesionales
+        </button>
+    </div>
+</form>
