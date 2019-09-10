@@ -1,14 +1,35 @@
 <form [formGroup]="form"
       (ngSubmit)="onSubmit()">
 
+    <!-- EXAMPLE -->
+    <fieldset>
+        <legend></legend>
+        <input type="checkbox"
+               formControlName="example">
+        EXAMPLE
+    </fieldset>
+
     <!-- questions -->
     <div id="questions"
          formArrayName="questions">
         <div *ngFor="let question of getQuestionsControls(); let i=index"
              [formGroupName]="i">
             <h4 class="">{{question.controls.title.value}}</h4>
-            <p *ngIf="questions[i].subtitle"
-               class="">{{questions[i].subtitle}}</p>
+            <p *ngIf="questions[i].subTitle"
+               class="">{{questions[i].subTitle}}</p>
+
+            <!-- answers -->
+            <fieldset>
+                <legend></legend>
+                <ng-container *ngFor="let answer of questions[i].offeredServiceAnswers; let j=index">
+                    <input type="{{getInputType(i)}}"
+                           id="question{{i}}-answer{{j}}"
+                           name="answer-{{i}}"
+                           value="{{answer.answer}}"
+                           [formControl]="getAnswersControls(i, getInputType(i) === 'checkbox' ? j : 0)">
+                    <label for="question{{i}}-answer{{j}}">{{answer.answer}}</label>
+                </ng-container>
+            </fieldset>
 
             <!-- answer -->
             <!-- formArrayName="answer" -->

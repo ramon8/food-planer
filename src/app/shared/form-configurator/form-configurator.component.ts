@@ -32,8 +32,10 @@ export class FormConfiguratorComponent implements OnInit, OnChanges, OnDestroy {
     constructor(private fb: FormBuilder) { }
 
     ngOnChanges(changes: SimpleChanges): void {
-        console.log(changes.questions.currentValue);
+        // console.log(changes.questions.currentValue);
         this.buildForm(changes.questions.currentValue);
+        // console.log('Question Controls', this.getQuestionsControls());
+        // console.log('Answer Controls', this.getAnswersControls(3));
     }
 
     ngOnInit(): void {
@@ -48,7 +50,8 @@ export class FormConfiguratorComponent implements OnInit, OnChanges, OnDestroy {
 
         // console.log(selectedOrderIds);
         // console.log(this.form.value.questions);
-        console.log(this.form.value.questions[2]);
+        console.log(this.form.value.example);
+        console.log(this.form.value.questions);
     }
 
     // returns a list of questions form control from form
@@ -61,7 +64,7 @@ export class FormConfiguratorComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     // returns a list of answers form control from form
-    getAnswersControls(questionIndex: number, answerIndex: number): AbstractControl[] | AbstractControl {
+    getAnswersControls(questionIndex: number, answerIndex?: number): AbstractControl[] | AbstractControl {
         const questionControls = this.getQuestionsControls(questionIndex);
         const answerControls = ((questionControls as FormGroup).get('answer') as FormArray).controls;
         if (answerIndex || answerIndex === 0) {
@@ -70,9 +73,22 @@ export class FormConfiguratorComponent implements OnInit, OnChanges, OnDestroy {
         return answerControls;
     }
 
+    // returns input type based on question type
+    getInputType(questionIndex: number): string {
+        switch (this.questions[questionIndex].offeredServiceQuestionType) {
+            case ServiceQuestionType.multiple:
+                return 'checkbox';
+            case ServiceQuestionType.unique:
+                return 'radio';
+            default:
+                return 'text';
+        }
+    }
+
     // form builder
     private buildForm(questions: OfferedServiceQuestion[]): void {
         this.form = this.fb.group({
+            example: [false, Validators.required],
             questions: this.fb.array(
                 questions.map(
                     (question) => this.createQuestionForm(question)
@@ -80,7 +96,7 @@ export class FormConfiguratorComponent implements OnInit, OnChanges, OnDestroy {
             ),
             textArea: [null]
         });
-        // console.log('FORM:', this.form);
+        console.log('FORM:', this.form);
         // console.log('QUESTIONS', this.getQuestionsControls());
         // console.log('QUESTIONS', this.getQuestionsControls(0));
     }
@@ -106,7 +122,7 @@ export class FormConfiguratorComponent implements OnInit, OnChanges, OnDestroy {
         if (question.offeredServiceQuestionType === ServiceQuestionType.multiple) {
             return this.fb.array(
                 question.offeredServiceAnswers.map(
-                    () => null
+                    () => false
                 )
             );
         }
