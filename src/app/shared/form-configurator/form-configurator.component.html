@@ -1,14 +1,6 @@
 <form [formGroup]="form"
       (ngSubmit)="onSubmit()">
 
-    <!-- EXAMPLE -->
-    <fieldset>
-        <legend></legend>
-        <input type="checkbox"
-               formControlName="example">
-        EXAMPLE
-    </fieldset>
-
     <!-- questions -->
     <div id="questions"
          formArrayName="questions">
@@ -21,63 +13,32 @@
             <!-- answers -->
             <fieldset>
                 <legend></legend>
-                <ng-container *ngFor="let answer of questions[i].offeredServiceAnswers; let j=index">
-                    <input type="{{getInputType(i)}}"
-                           id="question{{i}}-answer{{j}}"
-                           name="answer-{{i}}"
-                           value="{{answer.answer}}"
-                           [formControl]="getAnswersControls(i, getInputType(i) === 'checkbox' ? j : 0)">
-                    <label for="question{{i}}-answer{{j}}">{{answer.answer}}</label>
+
+                <!-- TODO: refactor to ng templates -->
+                <!-- multiple checkbox -->
+                <ng-container *ngIf="questions[i].offeredServiceQuestionType === ServiceQuestionType.multiple">
+                    <ng-container *ngFor="let control of getAnswersControls(i); let j=index">
+                        <input type="checkbox"
+                               id="question{{i}}-answer{{j}}"
+                               name="answer-{{i}}"
+                               [formControl]="control">
+                        <label for="question{{i}}-answer{{j}}">{{questions[i].offeredServiceAnswers[j].answer}}</label>
+                    </ng-container>
                 </ng-container>
+
+                <!-- radio -->
+                <ng-container *ngIf="questions[i].offeredServiceQuestionType === ServiceQuestionType.unique">
+                    <ng-container *ngFor="let answer of questions[i].offeredServiceAnswers; let j=index">
+                        <input type="radio"
+                               id="question{{i}}-answer{{j}}"
+                               name="answer-{{i}}"
+                               value="{{answer.answer}}"
+                               [formControl]="getAnswersControls(i, 0)">
+                        <label for="question{{i}}-answer{{j}}">{{answer.answer}}</label>
+                    </ng-container>
+                </ng-container>
+
             </fieldset>
-
-            <!-- answer -->
-            <!-- formArrayName="answer" -->
-            <!-- [formControlName]="getAnswersControls(i, questions[i].textBoxes[0].status === 'CHECKBOX' ? j : null)" -->
-            <!-- <div id="answers">
-                <div *ngFor="let item of questions[i].textBoxes; let j=index"
-                     style="display:inline-block;"
-                     class="form-group">
-                    <span>{{i}}-{{j}}</span>
-                    <fieldset class="">
-
-                        <legend class=""></legend>
-                        <input type="{{questions[i].textBoxes[j].type}}"
-                               name="answer-{{i}}"
-                               id="answer-{{i}}-{{j}}"
-                               [formControl]="getAnswersControls(i, questions[i].textBoxes[0].status === 'CHECKBOX' ? j : 0)"
-                               value="{{questions[i].textBoxes[j].title}}">
-                        <label for="{{questions[i].textBoxes[j].title}}"
-                               class="">
-                            {{questions[i].textBoxes[j].title}}
-                        </label>
-                    </fieldset>
-                </div>
-            </div> -->
-
-
-            <!-- <div id="answers">
-                <div *ngFor="let answer of getAnswersControls(i); let j=index"
-                     formArrayName="answer"
-                     style="display:inline-block;"
-                     class="form-group">
-                    <span>{{i}}-{{j}}</span>
-                    <fieldset class="">
-
-                        <legend class=""></legend>
-                        <input type="{{questions[i].textBoxes[j].type}}"
-                               name="answer-{{i}}"
-                               id="answer-{{i}}-{{j}}"
-                               [formControlName]="j"
-                               value="{{questions[i].textBoxes[j].title}}">
-                        <label for="{{questions[i].textBoxes[j].title}}"
-                               class="">
-                            {{questions[i].textBoxes[j].title}}
-                        </label>
-                    </fieldset>
-                </div>
-            </div> -->
-
 
         </div>
 

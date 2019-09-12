@@ -12,10 +12,13 @@ import {
     FormGroup,
     Validators,
     AbstractControl,
-    FormArray
+    FormArray,
 } from '@angular/forms';
 
-import { OfferedServiceQuestion, ServiceQuestionType } from '@app/_models';
+import {
+    OfferedServiceQuestion,
+    ServiceQuestionType,
+} from '@app/_models';
 
 @Component({
     selector: 'app-form-configurator',
@@ -43,6 +46,8 @@ export class FormConfiguratorComponent implements OnInit, OnChanges, OnDestroy {
 
     ngOnDestroy(): void { }
 
+    get ServiceQuestionType(): typeof ServiceQuestionType { return ServiceQuestionType; }
+
     onSubmit(): void {
         // const selectedOrderIds = this.form.value.orders
         //     .map((v, i) => v ? this.orders[i].id : null)
@@ -50,7 +55,6 @@ export class FormConfiguratorComponent implements OnInit, OnChanges, OnDestroy {
 
         // console.log(selectedOrderIds);
         // console.log(this.form.value.questions);
-        console.log(this.form.value.example);
         console.log(this.form.value.questions);
     }
 
@@ -66,7 +70,7 @@ export class FormConfiguratorComponent implements OnInit, OnChanges, OnDestroy {
     // returns a list of answers form control from form
     getAnswersControls(questionIndex: number, answerIndex?: number): AbstractControl[] | AbstractControl {
         const questionControls = this.getQuestionsControls(questionIndex);
-        const answerControls = ((questionControls as FormGroup).get('answer') as FormArray).controls;
+        const answerControls = ((questionControls as FormArray).get('answer') as FormArray).controls;
         if (answerIndex || answerIndex === 0) {
             return answerControls[answerIndex];
         }
@@ -74,6 +78,7 @@ export class FormConfiguratorComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     // returns input type based on question type
+    // TODO: NOT IN USE BECAUSE OF REACTIVE FORM BUG
     getInputType(questionIndex: number): string {
         switch (this.questions[questionIndex].offeredServiceQuestionType) {
             case ServiceQuestionType.multiple:
@@ -88,7 +93,6 @@ export class FormConfiguratorComponent implements OnInit, OnChanges, OnDestroy {
     // form builder
     private buildForm(questions: OfferedServiceQuestion[]): void {
         this.form = this.fb.group({
-            example: [false, Validators.required],
             questions: this.fb.array(
                 questions.map(
                     (question) => this.createQuestionForm(question)
@@ -96,9 +100,6 @@ export class FormConfiguratorComponent implements OnInit, OnChanges, OnDestroy {
             ),
             textArea: [null]
         });
-        console.log('FORM:', this.form);
-        // console.log('QUESTIONS', this.getQuestionsControls());
-        // console.log('QUESTIONS', this.getQuestionsControls(0));
     }
 
     // build individual question form
@@ -113,11 +114,6 @@ export class FormConfiguratorComponent implements OnInit, OnChanges, OnDestroy {
     private createAnswerForm(question: OfferedServiceQuestion): FormArray {
 
         const required = question.required ? Validators.required : '';
-        // return this.fb.array(
-        //     literal.textBoxes.map(
-        //         () => null
-        //     )
-        // );
 
         if (question.offeredServiceQuestionType === ServiceQuestionType.multiple) {
             return this.fb.array(
