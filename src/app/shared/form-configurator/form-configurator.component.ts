@@ -5,7 +5,8 @@ import {
     Output,
     OnChanges,
     OnDestroy,
-    SimpleChanges
+    SimpleChanges,
+    EventEmitter
 } from '@angular/core';
 import {
     FormBuilder,
@@ -14,10 +15,13 @@ import {
     AbstractControl,
     FormArray,
 } from '@angular/forms';
+import * as _ from 'lodash';
 
 import {
     OfferedServiceQuestion,
     ServiceQuestionType,
+    FormOutput,
+    Question,
 } from '@app/_models';
 
 @Component({
@@ -27,18 +31,14 @@ import {
 })
 export class FormConfiguratorComponent implements OnInit, OnChanges, OnDestroy {
 
-    // TODO: add Formquestions model
     @Input() questions: OfferedServiceQuestion[];
-    @Output() formInfo: any;
+    @Output() formInfo: EventEmitter<FormOutput> = new EventEmitter<FormOutput>();
     form: FormGroup;
 
     constructor(private fb: FormBuilder) { }
 
     ngOnChanges(changes: SimpleChanges): void {
-        // console.log(changes.questions.currentValue);
         this.buildForm(changes.questions.currentValue);
-        // console.log('Question Controls', this.getQuestionsControls());
-        // console.log('Answer Controls', this.getAnswersControls(3));
     }
 
     ngOnInit(): void {
@@ -49,13 +49,9 @@ export class FormConfiguratorComponent implements OnInit, OnChanges, OnDestroy {
     get ServiceQuestionType(): typeof ServiceQuestionType { return ServiceQuestionType; }
 
     onSubmit(): void {
-        // const selectedOrderIds = this.form.value.orders
-        //     .map((v, i) => v ? this.orders[i].id : null)
-        //     .filter(v => v !== null);
-
-        // console.log(selectedOrderIds);
-        // console.log(this.form.value.questions);
-        console.log(this.form.value.questions);
+        console.log(this.form.value);
+        console.log(this.filterResults(this.form.value));
+        this.formInfo.emit(this.filterResults(this.form.value));
     }
 
     // returns a list of questions form control from form
@@ -125,4 +121,25 @@ export class FormConfiguratorComponent implements OnInit, OnChanges, OnDestroy {
         return this.fb.array([null]);
     }
 
+    // filter form values and return new results object
+    private filterResults(formValues: FormOutput): FormOutput {
+        const filteredAnswers: FormOutput = _.cloneDeep(formValues);
+
+        formValues.questions.map(
+            (question: Question, i: number) => {
+                filteredAnswers.questions[i].answer = [];
+                question.answer.map(
+                    (answer: string | boolean, j: number) => {
+                        if (answer) {
+                            filteredAnswers.questions[i].answer.push(
+                                this.questions[i].offeredServiceAnswers[j].answer
+                            );
+                        }
+                    }
+                );
+            }
+        );
+
+        return filteredAnswers;
+    }
 }
