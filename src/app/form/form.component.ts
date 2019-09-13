@@ -3,7 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import {
     OfferedServiceQuestion,
     ServiceQuestionType,
-    ServiceAnswersType
+    ServiceAnswersType,
+    FormOutput
 } from '@app/_models';
 
 @Component({
@@ -13,7 +14,7 @@ import {
 })
 export class FormComponent implements OnInit {
 
-    // TODO: define model
+    // TODO: move to static example data
     questions: OfferedServiceQuestion[] = [
         {
             title: 'A Instalar en:',
@@ -162,6 +163,12 @@ export class FormComponent implements OnInit {
     constructor() { }
 
     ngOnInit(): void {
+    }
+
+    // form submit handler
+    onFormSubmit(formResult: FormOutput): void {
+        console.log('FORM RESULTS');
+        console.log(formResult);
     }
 
 }

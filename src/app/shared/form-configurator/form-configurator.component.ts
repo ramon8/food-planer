@@ -49,8 +49,8 @@ export class FormConfiguratorComponent implements OnInit, OnChanges, OnDestroy {
     get ServiceQuestionType(): typeof ServiceQuestionType { return ServiceQuestionType; }
 
     onSubmit(): void {
-        console.log(this.form.value);
-        console.log(this.filterResults(this.form.value));
+        // console.log(this.form.value);
+        // console.log(this.filterResults(this.form.value));
         this.formInfo.emit(this.filterResults(this.form.value));
     }
 

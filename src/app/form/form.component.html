@@ -1,5 +1,7 @@
 <div class="container">
 
     <h2>Form Page</h2>
-    <app-form-configurator [questions]="questions"></app-form-configurator>
+    <app-form-configurator [questions]="questions"
+                           (formInfo)=onFormSubmit($event)>
+    </app-form-configurator>
 </div>
