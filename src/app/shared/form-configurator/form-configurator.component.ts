@@ -66,7 +66,7 @@ export class FormConfiguratorComponent implements OnInit, OnChanges, OnDestroy {
     // returns a list of answers form control from form
     getAnswersControls(questionIndex: number, answerIndex?: number): AbstractControl[] | AbstractControl {
         const questionControls = this.getQuestionsControls(questionIndex);
-        const answerControls = ((questionControls as FormArray).get('answer') as FormArray).controls;
+        const answerControls = ((questionControls as FormGroup).get('answer') as FormArray).controls;
         if (answerIndex || answerIndex === 0) {
             return answerControls[answerIndex];
         }
@@ -127,16 +127,18 @@ export class FormConfiguratorComponent implements OnInit, OnChanges, OnDestroy {
 
         formValues.questions.map(
             (question: Question, i: number) => {
-                filteredAnswers.questions[i].answer = [];
-                question.answer.map(
-                    (answer: string | boolean, j: number) => {
-                        if (answer) {
-                            filteredAnswers.questions[i].answer.push(
-                                this.questions[i].offeredServiceAnswers[j].answer
-                            );
+                if (this.questions[i].offeredServiceQuestionType === ServiceQuestionType.multiple) {
+                    filteredAnswers.questions[i].answer = [];
+                    question.answer.map(
+                        (answer: string | boolean, j: number) => {
+                            if (answer) {
+                                filteredAnswers.questions[i].answer.push(
+                                    this.questions[i].offeredServiceAnswers[j].answer
+                                );
+                            }
                         }
-                    }
-                );
+                    );
+                }
             }
         );
 
