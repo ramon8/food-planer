@@ -138,6 +138,8 @@ export class FormConfiguratorComponent implements OnInit, OnChanges, OnDestroy {
                             }
                         }
                     );
+                } else if (question.answer[0] === null) {
+                    filteredAnswers.questions[i].answer = [];
                 }
             }
         );
