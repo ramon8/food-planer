@@ -50,7 +50,7 @@ export class FormConfiguratorComponent implements OnInit, OnChanges, OnDestroy {
 
     // submit form handler
     onSubmit(): void {
-        // console.log(this.form.value);
+        console.log(this.form.valid);
         // console.log(this.filterResults(this.form.value));
         this.formInfo.emit(this.filterResults(this.form.value));
     }
@@ -110,13 +110,12 @@ export class FormConfiguratorComponent implements OnInit, OnChanges, OnDestroy {
 
     private createAnswerForm(question: OfferedServiceQuestion): FormArray {
 
-        const required = question.required ? Validators.required : '';
-
         if (question.offeredServiceQuestionType === ServiceQuestionType.multiple) {
             return this.fb.array(
                 question.offeredServiceAnswers.map(
                     () => false
-                )
+                ),
+                question.required ? this.formArrayValidator : () => null
             );
         }
         return this.fb.array([null]);
@@ -146,5 +145,25 @@ export class FormConfiguratorComponent implements OnInit, OnChanges, OnDestroy {
         );
 
         return filteredAnswers;
+    }
+
+    // reset form
+    private resetForm(): void {
+        this.form.reset();
+    }
+
+    /* CUSTOM VALIDATORS */
+    // form array validator
+    private formArrayValidator(formArray: FormArray): { [s: string]: boolean } {
+
+        const valid = formArray.controls.some(
+            (control) => control.value
+        );
+
+        if (valid) {
+            return null;
+        }
+
+        return { notSelected: true };
     }
 }

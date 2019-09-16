@@ -3,8 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { StaticDataService } from '@app/_services/static-data.service';
 import {
     OfferedServiceQuestion,
-    ServiceQuestionType,
-    ServiceAnswersType,
     FormOutput
 } from '@app/_models';
 
