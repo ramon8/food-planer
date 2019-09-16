@@ -14,6 +14,7 @@ import {
     Validators,
     AbstractControl,
     FormArray,
+    FormControl,
 } from '@angular/forms';
 import * as _ from 'lodash';
 
@@ -46,13 +47,15 @@ export class FormConfiguratorComponent implements OnInit, OnChanges, OnDestroy {
 
     ngOnDestroy(): void { }
 
+    // ServiceQuestionType getter to be used in template
     get ServiceQuestionType(): typeof ServiceQuestionType { return ServiceQuestionType; }
 
     // submit form handler
     onSubmit(): void {
-        console.log(this.form.valid);
-        // console.log(this.filterResults(this.form.value));
-        this.formInfo.emit(this.filterResults(this.form.value));
+        if (this.form.valid) {
+            this.formInfo.emit(this.filterResults(this.form.value));
+            this.resetForm();
+        }
     }
 
     // returns a list of questions form control from form
@@ -66,11 +69,24 @@ export class FormConfiguratorComponent implements OnInit, OnChanges, OnDestroy {
 
     // returns a list of answers form control from form
     getAnswersControls(questionIndex: number, answerIndex?: number): AbstractControl[] | AbstractControl {
+
+        const questionType = this.questions[questionIndex].offeredServiceQuestionType;
         const questionControls = this.getQuestionsControls(questionIndex);
-        const answerControls = ((questionControls as FormGroup).get('answer') as FormArray).controls;
+        const abstractAnswerControls = (questionControls as FormGroup).get('answer');
+
+        // case single control (single answer)
+        if (questionType === ServiceQuestionType.unique ||
+            questionType === ServiceQuestionType.numeric) {
+            return abstractAnswerControls as FormControl;
+        }
+
+        // case single control in array of controls (multiple answers)
+        const answerControls = (abstractAnswerControls as FormArray).controls;
         if (answerIndex || answerIndex === 0) {
             return answerControls[answerIndex];
         }
+
+        // case return entire array of controls
         return answerControls;
     }
 
@@ -83,7 +99,7 @@ export class FormConfiguratorComponent implements OnInit, OnChanges, OnDestroy {
             case ServiceQuestionType.unique:
                 return 'radio';
             default:
-                return 'text';
+                return 'number';
         }
     }
 
@@ -104,11 +120,11 @@ export class FormConfiguratorComponent implements OnInit, OnChanges, OnDestroy {
         return this.fb.group({
             title: [question.title, Validators.required],
             answer: this.createAnswerForm(question)
-            // answer: [null, Validators.required]
         });
     }
 
-    private createAnswerForm(question: OfferedServiceQuestion): FormArray {
+    // answer FormArray builder
+    private createAnswerForm(question: OfferedServiceQuestion): FormArray | FormControl {
 
         if (question.offeredServiceQuestionType === ServiceQuestionType.multiple) {
             return this.fb.array(
@@ -118,7 +134,10 @@ export class FormConfiguratorComponent implements OnInit, OnChanges, OnDestroy {
                 question.required ? this.formArrayValidator : () => null
             );
         }
-        return this.fb.array([null]);
+        return this.fb.control(
+            null,
+            question.required ? Validators.required : () => null
+        );
     }
 
     // filter form values and return new results object
@@ -138,8 +157,6 @@ export class FormConfiguratorComponent implements OnInit, OnChanges, OnDestroy {
                             }
                         }
                     );
-                } else if (question.answer[0] === null) {
-                    filteredAnswers.questions[i].answer = [];
                 }
             }
         );
@@ -148,8 +165,10 @@ export class FormConfiguratorComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     // reset form
+    // TODO: use form reset instead of rebuilding the entire form (titles are lost)
     private resetForm(): void {
-        this.form.reset();
+        // this.form.reset();
+        this.buildForm(this.questions);
     }
 
     /* CUSTOM VALIDATORS */
