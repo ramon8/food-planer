@@ -38,6 +38,16 @@
                     </ng-container>
                 </ng-container>
 
+                <!-- numeric -->
+                <ng-container *ngIf="questions[i].offeredServiceQuestionType === ServiceQuestionType.numeric">
+                    <input type="number"
+                           id="question{{i}}-answer"
+                           name="answer-{{i}}"
+                           [formControl]="getAnswersControls(i, 0)"
+                           [required]="questions[i].required">
+                    <label for="question{{i}}-answer">Introduzca un valor</label>
+                </ng-container>
+
             </fieldset>
 
         </div>
