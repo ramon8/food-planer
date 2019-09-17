@@ -70,6 +70,7 @@ export class FormConfiguratorComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     // returns a list of answers form control from form
+    // TODO: remove??
     getAnswersControls(questionIndex: number, answerIndex?: number): AbstractControl[] | AbstractControl {
 
         const questionType = this.questions[questionIndex].offeredServiceQuestionType;
@@ -78,11 +79,13 @@ export class FormConfiguratorComponent implements OnInit, OnChanges, OnDestroy {
 
         // case single control (single answer)
         if (questionType === ServiceQuestionType.unique ||
-            questionType === ServiceQuestionType.numeric) {
+            questionType === ServiceQuestionType.numeric ||
+            questionType === ServiceQuestionType.alphanumeric) {
             return abstractAnswerControls as FormControl;
         }
 
         // case single control in array of controls (multiple answers)
+        // TODO: NOT WORKING
         const answerControls = (abstractAnswerControls as FormArray).controls;
         if (answerIndex || answerIndex === 0) {
             return answerControls[answerIndex];

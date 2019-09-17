@@ -31,20 +31,28 @@
                     <ng-container *ngFor="let answer of questions[i].offeredServiceAnswers; let j=index">
                         <input type="radio"
                                id="question{{i}}-answer{{j}}"
-                               name="answer-{{i}}"
                                value="{{answer.answer}}"
-                               [formControl]="getAnswersControls(i, 0)"
+                               formControlName="answer"
                                [required]="questions[i].required">
                         <label for="question{{i}}-answer{{j}}">{{answer.answer}}</label>
                     </ng-container>
+                </ng-container>
+
+                <!-- TODO: repeated code because of dynamic setting input type with reactive form control value type -->
+                <!-- alphanumeric -->
+                <ng-container *ngIf="questions[i].offeredServiceQuestionType === ServiceQuestionType.alphanumeric">
+                    <input type="text"
+                           id="question{{i}}-answer"
+                           formControlName="answer"
+                           [required]="questions[i].required">
+                    <label for="question{{i}}-answer">Introduzca un valor</label>
                 </ng-container>
 
                 <!-- numeric -->
                 <ng-container *ngIf="questions[i].offeredServiceQuestionType === ServiceQuestionType.numeric">
                     <input type="number"
                            id="question{{i}}-answer"
-                           name="answer-{{i}}"
-                           [formControl]="getAnswersControls(i, 0)"
+                           formControlName="answer"
                            [required]="questions[i].required">
                     <label for="question{{i}}-answer">Introduzca un valor</label>
                 </ng-container>
