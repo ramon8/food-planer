@@ -1,9 +1,51 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<nav class="navbar navbar-dark bg-dark">
+<!-- navbar - it may be replaced by a header tag -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand"
-       href="#">
-        Navbar
+       [routerLink]="['/']"
+       routerLinkActive="active">
+        {{ 'common.home' | translate }}
     </a>
+
+    <div class="collapse navbar-collapse"
+         id="navbarNav">
+        <ul class="navbar-nav">
+
+            <!-- form link -->
+            <li class="nav-item"
+                routerLinkActive="active">
+                <a class="nav-link"
+                   [routerLink]="['/form']">
+                    {{ 'common.form' | translate }}
+                </a>
+            </li>
+
+            <!-- TODO: extra feature -->
+            <li class="nav-item">
+                <a class="nav-link"
+                   href="#">
+                    {{ 'common.feature' | translate }}
+                </a>
+            </li>
+
+            <!-- TODO: extra feature -->
+            <li class="nav-item">
+                <a class="nav-link"
+                   href="#">
+                    {{ 'common.feature' | translate }}
+                </a>
+            </li>
+
+            <!-- TODO: extra feature -->
+            <li class="nav-item">
+                <a class="nav-link disabled"
+                   href="#"
+                   tabindex="-1"
+                   aria-disabled="true">
+                    {{ 'common.feature' | translate }}
+                </a>
+            </li>
+        </ul>
+    </div>
 
     <!-- change language dropdown -->
     <div class="d-inline-block"
@@ -22,11 +64,6 @@
             </button>
         </div>
     </div>
-
-    <!-- <button *ngFor="let lang of languages"
-            (click)="onLangClick(lang)">
-        {{ lang.name }}
-    </button> -->
 </nav>
 
 <!-- sidenav -->

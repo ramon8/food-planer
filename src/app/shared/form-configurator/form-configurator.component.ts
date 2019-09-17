@@ -45,7 +45,9 @@ export class FormConfiguratorComponent implements OnInit, OnChanges, OnDestroy {
     ngOnInit(): void {
     }
 
-    ngOnDestroy(): void { }
+    ngOnDestroy(): void {
+        console.log('destroyed form-configurator');
+    }
 
     // ServiceQuestionType getter to be used in template
     get ServiceQuestionType(): typeof ServiceQuestionType { return ServiceQuestionType; }
