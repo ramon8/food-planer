@@ -21,10 +21,16 @@ export class FormComponent implements OnInit {
         this.questions = this.staticData.getFormQuestions(2);
     }
 
+    getFormsAmountKeys(): string[] { return this.staticData.getFormsAmountKeys(); }
+
     // form submit handler
     onFormSubmit(formResult: FormOutput): void {
         console.log('FORM RESULTS');
         console.log(formResult);
     }
 
+    // change form handler
+    onFormChange(key: number): void {
+        this.questions = this.staticData.getFormQuestions(key);
+    }
 }

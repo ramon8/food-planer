@@ -4,4 +4,16 @@
     <app-form-configurator [questions]="questions"
                            (formInfo)=onFormSubmit($event)>
     </app-form-configurator>
+
+    <!-- button group -->
+    <div class="btn-group"
+         role="group"
+         aria-label="Basic example">
+        <button *ngFor="let key of getFormsAmountKeys()"
+                type="button"
+                class="btn btn-secondary"
+                (click)="onFormChange(key)">
+            {{ 'common.form' | translate }} {{ key }}
+        </button>
+    </div>
 </div>

@@ -329,7 +329,18 @@ export class StaticDataService {
 
     constructor() { }
 
+    // returns a single form on index
     getFormQuestions(formNumber: number): OfferedServiceQuestion[] {
         return this.formQuestions[formNumber].slice();
+    }
+
+    // returns keys of forms stored object
+    getFormsAmountKeys(): string[] {
+        return Object.keys(this.formQuestions);
+    }
+
+    // returns amount of forms stored
+    getFormsAmount(): number {
+        return Object.keys(this.formQuestions).length;
     }
 }
