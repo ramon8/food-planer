@@ -1,14 +1,25 @@
 // TODO: temporary form model
 
-// question type
-export interface OfferedServiceQuestion {
-    title: string;
-    subTitle?: string;
-    offeredServiceQuestionType: ServiceQuestionType;
-    offeredServiceAnswers?: OfferedServiceAnswers[];
-    questionOrder: number;
-    required: boolean;
+export class OfferedServiceQuestion {
+    constructor(
+        public title: string = '',
+        public subTitle: string = '',
+        public offeredServiceQuestionType: ServiceQuestionType = ServiceQuestionType.unique,
+        public offeredServiceAnswers: OfferedServiceAnswers[] = [],
+        public questionOrder: number = null,
+        public required: boolean = false,
+    ) { }
 }
+
+// question type
+// export interface OfferedServiceQuestion {
+//     title: string;
+//     subTitle?: string;
+//     offeredServiceQuestionType: ServiceQuestionType;
+//     offeredServiceAnswers?: OfferedServiceAnswers[];
+//     questionOrder: number;
+//     required: boolean;
+// }
 
 // answer type
 export interface OfferedServiceAnswers {

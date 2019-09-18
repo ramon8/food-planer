@@ -5,6 +5,7 @@ import {
     ServiceQuestionType,
     ServiceAnswersType,
 } from '@app/_models';
+import { OfferedServiceQuestionAdapter } from '@app/_adapters';
 
 @Injectable({
     providedIn: 'root'
@@ -12,6 +13,8 @@ import {
 export class StaticDataService {
 
     // static example data
+    private readonly formQuestions: { [name: number]: OfferedServiceQuestion[] };
+    /*
     private readonly formQuestions: { [name: number]: OfferedServiceQuestion[] } = {
         1: [
             {
@@ -150,7 +153,9 @@ export class StaticDataService {
                 required: true
             },
             {
-                title: 'Si tienes más información sobre el trabajo a realizar, escríbela aquí para poder calcular mejor el presupuesto estimado:',
+                // tslint:disable-next-line: max-line-length
+                title: 'Si tienes más información sobre el trabajo a realizar,
+                escríbela aquí para poder calcular mejor el presupuesto estimado:',
                 subTitle: '',
                 offeredServiceQuestionType: ServiceQuestionType.alphanumeric,
                 questionOrder: 6,
@@ -327,12 +332,20 @@ export class StaticDataService {
             }
         ]
     };
+    */
 
-    constructor() { }
+    constructor(
+        private offeredServiceQuestionAdapter: OfferedServiceQuestionAdapter
+    ) { }
 
     // returns a single form on index
     getFormQuestions(formNumber: number): OfferedServiceQuestion[] {
-        return this.formQuestions[formNumber].slice();
+        return this.formQuestions[formNumber]
+            .map(
+                (question) => {
+                    return this.offeredServiceQuestionAdapter.adapt(question);
+                }
+            );
     }
 
     // returns keys of forms stored object

@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 
 import { environment } from '@env/environment';
 import { OfferedServiceQuestion, HttpResponse, formIdRange } from '@app/_models';
+import { OfferedServiceQuestionAdapter } from '@app/_adapters';
 
 @Injectable({
     providedIn: 'root'
@@ -13,7 +14,10 @@ export class ApiDataService {
 
     private readonly apiUrl: string = `${environment.host}${environment.baseUrl}`;
 
-    constructor(private httpClient: HttpClient) { }
+    constructor(
+        private httpClient: HttpClient,
+        private offeredServiceQuestionAdapter: OfferedServiceQuestionAdapter
+    ) { }
 
     // api call to get dynamic form data
     // TODO: return an array of instances of OfferedServiceQuestion
@@ -28,7 +32,12 @@ export class ApiDataService {
             .pipe(
                 map(
                     (response: HttpResponse): OfferedServiceQuestion[] => {
-                        return response.data.offeredServiceQuestions;
+                        return response.data.offeredServiceQuestions
+                            .map(
+                                (question) => {
+                                    return this.offeredServiceQuestionAdapter.adapt(question);
+                                }
+                            );
                     }
                 )
             );
