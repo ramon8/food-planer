@@ -17,7 +17,7 @@ export class FormComponent implements OnInit {
 
     questions: OfferedServiceQuestion[];
     // TODO: make private after testing
-    formId: formIdRange = 68;
+    formId: formIdRange = 64;
 
     constructor(
         private staticData: StaticDataService,
@@ -56,6 +56,11 @@ export class FormComponent implements OnInit {
 
     // executes service subscription
     private getForm(): void {
+
+        // solves bug changing values in form
+        this.questions = null;
+
+        // subscription to service
         this.apiData.getForm(this.formId)
             .subscribe((questions: OfferedServiceQuestion[]) => {
                 this.questions = questions;
