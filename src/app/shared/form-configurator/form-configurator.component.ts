@@ -78,9 +78,12 @@ export class FormConfiguratorComponent implements OnInit, OnChanges, OnDestroy {
         const abstractAnswerControls = (questionControls as FormGroup).get('answer');
 
         // case single control (single answer)
-        if (questionType === ServiceQuestionType.unique ||
+        if (
+            questionType === ServiceQuestionType.unique ||
             questionType === ServiceQuestionType.numeric ||
-            questionType === ServiceQuestionType.alphanumeric) {
+            questionType === ServiceQuestionType.alphanumeric ||
+            questionType === ServiceQuestionType.numeric_selector
+        ) {
             return abstractAnswerControls as FormControl;
         }
 

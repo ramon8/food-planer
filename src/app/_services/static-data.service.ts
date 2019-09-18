@@ -11,7 +11,8 @@ import {
 })
 export class StaticDataService {
 
-    private formQuestions: { [name: number]: OfferedServiceQuestion[] } = {
+    // static example data
+    private readonly formQuestions: { [name: number]: OfferedServiceQuestion[] } = {
         1: [
             {
                 title: 'A Instalar en:',

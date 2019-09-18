@@ -4,6 +4,8 @@
 
 export const environment = {
     production: false,
+    host: 'http://34.76.160.209/',
+    baseUrl: 'search/v1/services/',
     defaultLanguage: {
         code: 'en',
         name: 'English'

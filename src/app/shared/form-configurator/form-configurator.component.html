@@ -49,11 +49,13 @@
                 </ng-container>
 
                 <!-- numeric -->
-                <ng-container *ngIf="questions[i].offeredServiceQuestionType === ServiceQuestionType.numeric">
+                <ng-container *ngIf="questions[i].offeredServiceQuestionType === ServiceQuestionType.numeric ||
+                                     questions[i].offeredServiceQuestionType === ServiceQuestionType.numeric_selector">
                     <input type="number"
                            id="question{{i}}-answer"
                            formControlName="answer"
-                           [required]="questions[i].required">
+                           [required]="questions[i].required"
+                           [ngClass]="{'numeric-selector': questions[i].offeredServiceQuestionType === ServiceQuestionType.numeric_selector}">
                     <label for="question{{i}}-answer">Introduzca un valor</label>
                 </ng-container>
 
