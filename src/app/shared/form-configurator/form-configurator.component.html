@@ -14,49 +14,94 @@
             <fieldset>
                 <legend></legend>
 
-                <!-- TODO: refactor to ng templates -->
-                <!-- multiple checkbox -->
-                <ng-container *ngIf="questions[i].offeredServiceQuestionType === ServiceQuestionType.multiple">
-                    <ng-container *ngFor="let control of getAnswersControls(i); let j=index">
-                        <input type="checkbox"
-                               id="question{{i}}-answer{{j}}"
-                               name="answer-{{i}}"
-                               [formControl]="control">
-                        <label for="question{{i}}-answer{{j}}">{{questions[i].offeredServiceAnswers[j].answer}}</label>
-                    </ng-container>
-                </ng-container>
+                <!-- TODO: refactor to ng templates maybe? -->
+                <ng-container [ngSwitch]="questions[i].offeredServiceQuestionType">
 
-                <!-- radio -->
-                <ng-container *ngIf="questions[i].offeredServiceQuestionType === ServiceQuestionType.unique">
-                    <ng-container *ngFor="let answer of questions[i].offeredServiceAnswers; let j=index">
-                        <input type="radio"
-                               id="question{{i}}-answer{{j}}"
-                               value="{{answer.answer}}"
+                    <!-- multiple answers -->
+                    <ng-container *ngSwitchCase="ServiceQuestionType.multiple">
+                        <ng-container *ngFor="let control of getAnswersControls(i); let j=index">
+
+                            <ng-container [ngSwitch]="questions[i].offeredServiceAnswers[j].offeredServiceAnswerType">
+
+                                <!-- numeric -->
+                                <ng-container *ngSwitchCase="ServiceAnswersType.numeric">
+                                    <input type="number"
+                                           id="question{{i}}-answer{{j}}"
+                                           name="answer-{{i}}"
+                                           [formControl]="control"
+                                           [required]="questions[i].required">
+                                </ng-container>
+
+                                <!-- checkbox -->
+                                <ng-container *ngSwitchDefault>
+                                    <input type="checkbox"
+                                           id="question{{i}}-answer{{j}}"
+                                           name="answer-{{i}}"
+                                           [formControl]="control">
+                                </ng-container>
+
+                                <label for="question{{i}}-answer{{j}}">
+                                    {{questions[i].offeredServiceAnswers[j].answer}}
+                                </label>
+                            </ng-container>
+
+                        </ng-container>
+                    </ng-container>
+
+                    <!-- unique answers -->
+                    <ng-container *ngSwitchCase="ServiceQuestionType.unique">
+                        <ng-container *ngFor="let answer of questions[i].offeredServiceAnswers; let j=index">
+
+                            <ng-container [ngSwitch]="questions[i].offeredServiceAnswers[j].offeredServiceAnswerType">
+
+                                <!-- numeric -->
+                                <ng-container *ngSwitchCase="ServiceAnswersType.numeric">
+                                    <input type="number"
+                                           id="question{{i}}-answer{{j}}"
+                                           formControlName="answer"
+                                           [required]="questions[i].required">
+                                </ng-container>
+
+                                <!-- radio -->
+                                <ng-container *ngSwitchDefault>
+                                    <input type="radio"
+                                           id="question{{i}}-answer{{j}}"
+                                           value="{{answer.answer}}"
+                                           formControlName="answer"
+                                           [required]="questions[i].required">
+                                </ng-container>
+
+                                <label for="question{{i}}-answer{{j}}">
+                                    {{answer.answer}}
+                                </label>
+                            </ng-container>
+
+                        </ng-container>
+                    </ng-container>
+
+                    <!-- alphanumeric answers -->
+                    <ng-container *ngSwitchCase="ServiceQuestionType.alphanumeric">
+                        <input type="text"
+                               id="question{{i}}-answer"
                                formControlName="answer"
                                [required]="questions[i].required">
-                        <label for="question{{i}}-answer{{j}}">{{answer.answer}}</label>
+                        <label for="question{{i}}-answer">
+                            Introduzca un valor
+                        </label>
                     </ng-container>
-                </ng-container>
 
-                <!-- TODO: repeated code because of dynamic setting input type with reactive form control value type -->
-                <!-- alphanumeric -->
-                <ng-container *ngIf="questions[i].offeredServiceQuestionType === ServiceQuestionType.alphanumeric">
-                    <input type="text"
-                           id="question{{i}}-answer"
-                           formControlName="answer"
-                           [required]="questions[i].required">
-                    <label for="question{{i}}-answer">Introduzca un valor</label>
-                </ng-container>
+                    <!-- numeric answers -->
+                    <ng-container *ngSwitchDefault>
+                        <input type="number"
+                               id="question{{i}}-answer"
+                               formControlName="answer"
+                               [required]="questions[i].required"
+                               [ngClass]="{'numeric-selector': questions[i].offeredServiceQuestionType === ServiceQuestionType.numeric_selector}">
+                        <label for="question{{i}}-answer">
+                            Introduzca un número
+                        </label>
+                    </ng-container>
 
-                <!-- numeric -->
-                <ng-container *ngIf="questions[i].offeredServiceQuestionType === ServiceQuestionType.numeric ||
-                                     questions[i].offeredServiceQuestionType === ServiceQuestionType.numeric_selector">
-                    <input type="number"
-                           id="question{{i}}-answer"
-                           formControlName="answer"
-                           [required]="questions[i].required"
-                           [ngClass]="{'numeric-selector': questions[i].offeredServiceQuestionType === ServiceQuestionType.numeric_selector}">
-                    <label for="question{{i}}-answer">Introduzca un valor</label>
                 </ng-container>
 
             </fieldset>

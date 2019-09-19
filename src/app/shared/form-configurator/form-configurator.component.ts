@@ -23,6 +23,7 @@ import {
     ServiceQuestionType,
     FormOutput,
     Question,
+    ServiceAnswersType,
 } from '@app/_models';
 
 @Component({
@@ -49,8 +50,9 @@ export class FormConfiguratorComponent implements OnInit, OnChanges, OnDestroy {
         console.log('destroyed form-configurator');
     }
 
-    // ServiceQuestionType getter to be used in template
+    // ServiceQuestionType & ServiceAnswersType getters to be used in template
     get ServiceQuestionType(): typeof ServiceQuestionType { return ServiceQuestionType; }
+    get ServiceAnswersType(): typeof ServiceAnswersType { return ServiceAnswersType; }
 
     // submit form handler
     onSubmit(): void {
