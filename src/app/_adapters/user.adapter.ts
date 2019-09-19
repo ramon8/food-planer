@@ -27,4 +27,12 @@ export class UserAdapter implements Adapter<User> {
             item.username
         );
     }
+
+    adaptMap(items: any[] = []): User[] {
+        return items.map(
+            (item) => {
+                return this.adapt(item);
+            }
+        );
+    }
 }

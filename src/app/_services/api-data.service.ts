@@ -28,15 +28,15 @@ export class ApiDataService {
             params: new HttpParams().set('language', language)
         };
 
+
+
         return this.httpClient.get<HttpResponse>(url, options)
             .pipe(
                 map(
                     (response: HttpResponse): OfferedServiceQuestion[] => {
-                        return response.data.offeredServiceQuestions
-                            .map(
-                                (question) => {
-                                    return this.offeredServiceQuestionAdapter.adapt(question);
-                                }
+                        return this.offeredServiceQuestionAdapter
+                            .adaptMap(
+                                response.data.offeredServiceQuestions
                             );
                     }
                 )

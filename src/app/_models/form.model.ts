@@ -5,7 +5,7 @@ export class OfferedServiceQuestion {
         public title: string = '',
         public subTitle: string = '',
         public offeredServiceQuestionType: ServiceQuestionType = ServiceQuestionType.unique,
-        public offeredServiceAnswers: OfferedServiceAnswers[] = [],
+        public offeredServiceAnswers: OfferedServiceAnswer[] = [],
         public questionOrder: number = null,
         public required: boolean = false,
     ) { }
@@ -16,16 +16,25 @@ export class OfferedServiceQuestion {
 //     title: string;
 //     subTitle?: string;
 //     offeredServiceQuestionType: ServiceQuestionType;
-//     offeredServiceAnswers?: OfferedServiceAnswers[];
+//     offeredServiceAnswers?: OfferedServiceAnswer[];
 //     questionOrder: number;
 //     required: boolean;
 // }
 
 // answer type
-export interface OfferedServiceAnswers {
-    answer: string;
-    offeredServiceAnswerType: ServiceAnswersType;
-    answerOrder: number;
+// export interface OfferedServiceAnswer {
+//     answer: string;
+//     offeredServiceAnswerType: ServiceAnswersType;
+//     answerOrder: number;
+// }
+
+// tslint:disable-next-line: max-classes-per-file
+export class OfferedServiceAnswer {
+    constructor(
+        public answer: string = '',
+        public offeredServiceAnswerType: ServiceAnswersType = ServiceAnswersType.closed,
+        public answerOrder: number = null,
+    ) { }
 }
 
 export enum ServiceQuestionType {

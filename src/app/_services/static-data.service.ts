@@ -340,12 +340,9 @@ export class StaticDataService {
 
     // returns a single form on index
     getFormQuestions(formNumber: number): OfferedServiceQuestion[] {
-        return this.formQuestions[formNumber]
-            .map(
-                (question) => {
-                    return this.offeredServiceQuestionAdapter.adapt(question);
-                }
-            );
+        return this.offeredServiceQuestionAdapter.adaptMap(
+            this.formQuestions[formNumber]
+        );
     }
 
     // returns keys of forms stored object
