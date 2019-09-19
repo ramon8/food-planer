@@ -29,7 +29,7 @@ export class FormComponent implements OnInit {
         this.getForm();
     }
 
-    getFormsAmountKeys(): string[] { return this.staticData.getFormsAmountKeys(); }
+    // getFormsAmountKeys(): string[] { return this.staticData.getFormsAmountKeys(); }
 
     // form submit handler
     onFormSubmit(formResult: FormOutput): void {
