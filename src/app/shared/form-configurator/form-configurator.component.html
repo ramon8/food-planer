@@ -37,7 +37,8 @@
                                     <input type="checkbox"
                                            id="question{{i}}-answer{{j}}"
                                            name="answer-{{i}}"
-                                           [formControl]="control">
+                                           [formControl]="control"
+                                           (change)="questions[i].offeredServiceAnswers[j].offeredServiceAnswerType === ServiceAnswersType.default ? onDefaultChange(i,j) : null">
                                 </ng-container>
 
                                 <label for="question{{i}}-answer{{j}}">

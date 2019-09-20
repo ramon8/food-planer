@@ -56,6 +56,7 @@ export class FormConfiguratorComponent implements OnInit, OnChanges, OnDestroy {
 
     // submit form handler
     onSubmit(): void {
+        console.log(this.form.value.questions);
         if (this.form.valid) {
             this.formInfo.emit(this.filterResults(this.form.value));
             this.resetForm();
@@ -65,6 +66,16 @@ export class FormConfiguratorComponent implements OnInit, OnChanges, OnDestroy {
     // unique input select handler to erase values of all other answer options
     onUniqueSelect(questionNum: number): void {
         (this.getAnswersControls(questionNum) as FormControl).reset();
+    }
+
+    onDefaultChange(questionIndex: number, answerIndex: number): void {
+        (this.getAnswersControls(questionIndex) as FormControl[]).map(
+            (element, i) => {
+                if (answerIndex !== i) {
+                    element.reset();
+                }
+            }
+        );
     }
 
     // returns a list of questions form control from form
@@ -77,7 +88,6 @@ export class FormConfiguratorComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     // returns a list of answers form control from form
-    // TODO: remove??
     getAnswersControls(questionIndex: number, answerIndex?: number): AbstractControl[] | AbstractControl {
 
         const questionType = this.questions[questionIndex].offeredServiceQuestionType;
@@ -95,7 +105,6 @@ export class FormConfiguratorComponent implements OnInit, OnChanges, OnDestroy {
         }
 
         // case single control in array of controls (multiple answers)
-        // TODO: NOT WORKING
         const answerControls = (abstractAnswerControls as FormArray).controls;
         if (answerIndex || answerIndex === 0) {
             return answerControls[answerIndex];
