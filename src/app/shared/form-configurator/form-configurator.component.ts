@@ -62,6 +62,11 @@ export class FormConfiguratorComponent implements OnInit, OnChanges, OnDestroy {
         }
     }
 
+    // unique input select handler to erase values of all other answer options
+    onUniqueSelect(questionNum: number): void {
+        (this.getAnswersControls(questionNum) as FormControl).reset();
+    }
+
     // returns a list of questions form control from form
     getQuestionsControls(index?: number): AbstractControl[] | AbstractControl {
         const controls = (this.form.get('questions') as FormArray).controls;

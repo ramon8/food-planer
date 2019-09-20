@@ -57,6 +57,7 @@
                                 <!-- numeric -->
                                 <ng-container *ngSwitchCase="ServiceAnswersType.numeric">
                                     <input type="number"
+                                           (focus)="onUniqueSelect(i)"
                                            id="question{{i}}-answer{{j}}"
                                            formControlName="answer"
                                            [required]="questions[i].required">
@@ -65,6 +66,7 @@
                                 <!-- radio -->
                                 <ng-container *ngSwitchDefault>
                                     <input type="radio"
+                                           (focus)="onUniqueSelect(i)"
                                            id="question{{i}}-answer{{j}}"
                                            value="{{answer.answer}}"
                                            formControlName="answer"
