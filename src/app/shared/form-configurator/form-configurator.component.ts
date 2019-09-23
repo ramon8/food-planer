@@ -56,7 +56,6 @@ export class FormConfiguratorComponent implements OnInit, OnChanges, OnDestroy {
 
     // submit form handler
     onSubmit(): void {
-        console.log(this.form.value.questions);
         if (this.form.valid) {
             this.formInfo.emit(this.filterResults(this.form.value));
             this.resetForm();
@@ -68,14 +67,29 @@ export class FormConfiguratorComponent implements OnInit, OnChanges, OnDestroy {
         (this.getAnswersControls(questionNum) as FormControl).reset();
     }
 
+    // resets other answer options except the default one
     onDefaultChange(questionIndex: number, answerIndex: number): void {
-        (this.getAnswersControls(questionIndex) as FormControl[]).map(
-            (element, i) => {
-                if (answerIndex !== i) {
-                    element.reset();
+        (this.getAnswersControls(questionIndex) as FormControl[])
+            .map(
+                (control, i) => {
+                    if (answerIndex !== i) {
+                        control.reset();
+                    }
                 }
-            }
-        );
+            );
+    }
+
+    // reset default answer
+    onNotDefaultChange(questionIndex: number): void {
+        (this.getAnswersControls(questionIndex) as FormControl[])
+            .map(
+                (control, i) => {
+                    const answerType = this.questions[questionIndex].offeredServiceAnswers[i].offeredServiceAnswerType;
+                    if (answerType === ServiceAnswersType.default) {
+                        control.reset();
+                    }
+                }
+            );
     }
 
     // returns a list of questions form control from form
@@ -172,15 +186,16 @@ export class FormConfiguratorComponent implements OnInit, OnChanges, OnDestroy {
             (question: Question, i: number) => {
                 if (this.questions[i].offeredServiceQuestionType === ServiceQuestionType.multiple) {
                     filteredAnswers.questions[i].answer = [];
-                    question.answer.map(
-                        (answer: string | boolean, j: number) => {
-                            if (answer) {
-                                filteredAnswers.questions[i].answer.push(
-                                    this.questions[i].offeredServiceAnswers[j].answer
-                                );
+                    question.answer
+                        .map(
+                            (answer: string | boolean, j: number) => {
+                                if (answer) {
+                                    filteredAnswers.questions[i].answer.push(
+                                        this.questions[i].offeredServiceAnswers[j].answer
+                                    );
+                                }
                             }
-                        }
-                    );
+                        );
                 }
             }
         );

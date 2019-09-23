@@ -38,7 +38,7 @@
                                            id="question{{i}}-answer{{j}}"
                                            name="answer-{{i}}"
                                            [formControl]="control"
-                                           (change)="questions[i].offeredServiceAnswers[j].offeredServiceAnswerType === ServiceAnswersType.default ? onDefaultChange(i,j) : null">
+                                           (change)="questions[i].offeredServiceAnswers[j].offeredServiceAnswerType === ServiceAnswersType.default ? onDefaultChange(i,j) : onNotDefaultChange(i)">
                                 </ng-container>
 
                                 <label for="question{{i}}-answer{{j}}">
