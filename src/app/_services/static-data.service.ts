@@ -1,10 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import {
-    OfferedServiceQuestion,
-    ServiceQuestionType,
-    ServiceAnswersType,
-} from '@app/_models';
+import { OfferedServiceQuestion } from '@app/_models';
 import { OfferedServiceQuestionAdapter } from '@app/_adapters';
 
 @Injectable({

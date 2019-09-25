@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // modules
 
@@ -22,13 +23,15 @@ import { FormConfiguratorComponent } from './form-configurator/form-configurator
         CommonModule,
         TranslateModule,
         ReactiveFormsModule,
+        NgbModule,
     ],
     exports: [
         CommonModule,
         TranslateModule,
         SidenavComponent,
         HidePipe,
-        FormConfiguratorComponent
+        FormConfiguratorComponent,
+        NgbModule,
     ]
 })
 export class SharedModule { }

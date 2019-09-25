@@ -6,13 +6,17 @@
          formArrayName="questions">
         <div *ngFor="let question of getQuestionsControls(); let i=index"
              [formGroupName]="i">
-            <h4 class="">{{questions[i].title}}</h4>
-            <p *ngIf="questions[i].subTitle"
-               class="">{{questions[i].subTitle}}</p>
+            <!-- <h4 class="">{{questions[i].title}}</h4> -->
+            <!-- <p *ngIf="questions[i].subTitle"
+               class="">{{questions[i].subTitle}}</p> -->
 
             <!-- answers -->
-            <fieldset>
-                <legend></legend>
+            <fieldset class="form-group">
+                <legend>{{questions[i].title}}</legend>
+                <p *ngIf="questions[i].subTitle"
+                   class="sub-title">
+                    {{questions[i].subTitle}}
+                </p>
 
                 <!-- TODO: refactor to ng templates maybe? -->
                 <ng-container [ngSwitch]="questions[i].offeredServiceQuestionType">
@@ -26,24 +30,33 @@
                                 <!-- numeric -->
                                 <ng-container *ngSwitchCase="ServiceAnswersType.numeric">
                                     <input type="number"
+                                           class="form-control"
                                            id="question{{i}}-answer{{j}}"
                                            name="answer-{{i}}"
                                            [formControl]="control"
                                            [required]="questions[i].required">
+                                    <label for="question{{i}}-answer{{j}}">
+                                        {{questions[i].offeredServiceAnswers[j].answer}}
+                                    </label>
                                 </ng-container>
 
                                 <!-- checkbox -->
-                                <ng-container *ngSwitchDefault>
+                                <div *ngSwitchDefault
+                                     class="form-check">
                                     <input type="checkbox"
+                                           class="form-check-input"
                                            id="question{{i}}-answer{{j}}"
                                            name="answer-{{i}}"
                                            [formControl]="control"
                                            (change)="questions[i].offeredServiceAnswers[j].offeredServiceAnswerType === ServiceAnswersType.default ? onDefaultChange(i,j) : onNotDefaultChange(i)">
-                                </ng-container>
+                                    <label for="question{{i}}-answer{{j}}">
+                                        {{questions[i].offeredServiceAnswers[j].answer}}
+                                    </label>
+                                </div>
 
-                                <label for="question{{i}}-answer{{j}}">
+                                <!-- <label for="question{{i}}-answer{{j}}">
                                     {{questions[i].offeredServiceAnswers[j].answer}}
-                                </label>
+                                </label> -->
                             </ng-container>
 
                         </ng-container>
@@ -58,25 +71,34 @@
                                 <!-- numeric -->
                                 <ng-container *ngSwitchCase="ServiceAnswersType.numeric">
                                     <input type="number"
+                                           class="form-control"
                                            (focus)="onUniqueSelect(i)"
                                            id="question{{i}}-answer{{j}}"
                                            formControlName="answer"
                                            [required]="questions[i].required">
+                                    <label for="question{{i}}-answer{{j}}">
+                                        {{answer.answer}}
+                                    </label>
                                 </ng-container>
 
                                 <!-- radio -->
-                                <ng-container *ngSwitchDefault>
+                                <div class="form-check"
+                                     *ngSwitchDefault>
                                     <input type="radio"
+                                           class="form-check-input"
                                            (focus)="onUniqueSelect(i)"
                                            id="question{{i}}-answer{{j}}"
                                            value="{{answer.answer}}"
                                            formControlName="answer"
                                            [required]="questions[i].required">
-                                </ng-container>
+                                    <label for="question{{i}}-answer{{j}}">
+                                        {{answer.answer}}
+                                    </label>
+                                </div>
 
-                                <label for="question{{i}}-answer{{j}}">
+                                <!-- <label for="question{{i}}-answer{{j}}">
                                     {{answer.answer}}
-                                </label>
+                                </label> -->
                             </ng-container>
 
                         </ng-container>
@@ -85,6 +107,7 @@
                     <!-- alphanumeric answers -->
                     <ng-container *ngSwitchCase="ServiceQuestionType.alphanumeric">
                         <input type="text"
+                               class="form-control"
                                id="question{{i}}-answer"
                                formControlName="answer"
                                [required]="questions[i].required">
@@ -115,11 +138,9 @@
 
     <!-- more information -->
     <div id="more-information">
-        <fieldset class="">
+        <fieldset class="form-group">
             <legend class="">Más información</legend>
-            <label for=""
-                   class="">Más información</label>
-            <textarea class=""
+            <textarea class="form-control"
                       placeholder="Si tienes más información sobre el trabajo a realizar, añádelo aquí para poder calcular mejor el presupuesto estimado."
                       formControlName="textArea"
                       rows="4"
@@ -130,7 +151,8 @@
 
     <!-- button -->
     <div class="">
-        <button class="">
+        <button type="button"
+                class="btn btn-primary">
             Encontrar profesionales
         </button>
     </div>

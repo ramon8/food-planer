@@ -15,6 +15,9 @@ span {
     &.italic {
         font-style: italic;
     }
+    &.title {
+        padding: 15px 0;
+    }
 
     color: $darkgray;
 }

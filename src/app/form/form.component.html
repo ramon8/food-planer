@@ -1,13 +1,14 @@
 <div class="container">
 
-    <h2>Form Page</h2>
+    <h2 class="title">Form Page</h2>
     <app-form-configurator *ngIf="questions"
                            [questions]="questions"
                            (formInfo)=onFormSubmit($event)>
     </app-form-configurator>
 
     <!-- button group -->
-    <div class="btn-group"
+    <!-- testing -->
+    <!-- <div class="btn-group"
          role="group"
          aria-label="Basic example">
         <button type="button"
@@ -21,7 +22,7 @@
             {{ 'common.form' | translate }} +
         </button>
         Form ID: {{ formId }}
-    </div>
+    </div> -->
     <!-- <div class="btn-group"
          role="group"
          aria-label="Basic example">
