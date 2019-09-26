@@ -19,11 +19,12 @@
                 </a>
             </li>
 
-            <!-- TODO: extra feature -->
-            <li class="nav-item">
+            <!-- gifs link -->
+            <li class="nav-item"
+                routerLinkActive="active">
                 <a class="nav-link"
-                   href="#">
-                    {{ 'common.feature' | translate }}
+                   [routerLink]="['/gifs']">
+                    {{ 'common.gif' | translate }}
                 </a>
             </li>
 

@@ -4,3 +4,8 @@ export * from './http-response.model';
 export * from './forms/form.model';
 export * from './forms/offered-service-question.model';
 export * from './forms/offered-service-answer.model';
+export * from './giphy/gif.model';
+export * from './giphy/giphy-response.model';
+export * from './giphy/giphy-pagination.model';
+export * from './giphy/giphy-meta.model';
+export * from './giphy/images.model';

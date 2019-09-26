@@ -2,6 +2,7 @@
     "common": {
         "home": "Home",
         "form": "Form",
+        "gif": "Gif",
         "feature": "Feature",
         "header": "Responsive color change",
         "title": "Welcome to angular-bootstrap-seed!",

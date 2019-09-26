@@ -6,6 +6,11 @@ export const environment = {
     production: false,
     host: 'http://34.76.160.209/',
     baseUrl: 'search/v1/services/',
+    giphy: {
+        host: 'http://api.giphy.com/',
+        baseUrl: 'v1/gifs/',
+        apiKey: 'dc6zaTOxFJmzC'
+    },
     defaultLanguage: {
         code: 'en',
         name: 'English'

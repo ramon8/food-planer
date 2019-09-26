@@ -1,0 +1,9 @@
+<div class="container">
+
+    <h2 class="title">Search Gifs</h2>
+
+    <img *ngFor="let gif of gifs"
+         [src]="gif.images.original.webp"
+         alt="{{gif.title}}">
+
+</div>
