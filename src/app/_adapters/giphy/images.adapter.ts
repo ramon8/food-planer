@@ -12,6 +12,7 @@ export class ImagesAdapter implements Adapter<Images> {
 
     adapt(item: any = {}): Images {
         return new Images(
+            item.fixed_height,
             item.original
         );
     }

@@ -9,7 +9,8 @@ export const environment = {
     giphy: {
         host: 'http://api.giphy.com/',
         baseUrl: 'v1/gifs/',
-        apiKey: 'dc6zaTOxFJmzC'
+        apiKey: 'dc6zaTOxFJmzC',
+        defaultSearch: 'cats'
     },
     defaultLanguage: {
         code: 'en',

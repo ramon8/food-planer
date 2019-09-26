@@ -2,8 +2,31 @@
 
     <h2 class="title">Search Gifs</h2>
 
-    <img *ngFor="let gif of gifs"
-         [src]="gif.images.original.webp"
-         alt="{{gif.title}}">
+    <div class="form-group">
+        <!-- <label> -->
+        <input #searchBar
+               type="text"
+               class="form-control"
+               placeholder="Search gif"
+               (keyup)="onSearchInput(searchBar.value)"
+               [(ngModel)]="searchTerm">
+
+        <!-- Introduzca un valor -->
+        <!-- </label> -->
+    </div>
+
+    <div class="flex flex-wrap">
+        <a *ngFor="let gif of gifs"
+           [routerLink]="gif.id">
+            <picture>
+                <!-- <source media="(min-width: 768px)"
+                    [srcset]="gif.images.original.webp"
+                    type="image/webp"> -->
+                <img [src]="gif.images.fixedHeight.webp"
+                     alt="{{gif.title}}"
+                     [height]="gif.images.fixedHeight.height">
+            </picture>
+        </a>
+    </div>
 
 </div>

@@ -11,7 +11,7 @@ export class Gif {
         public embedUrl: string = '',
         public username: string = '',
         public source: string = '',
-        public rating: string = '',
+        public rating: 'g' | 'pg' | 'pg-13' | 'r' = 'g',
         public contentUrl: string = '',
         public user: User = null,
         public sourceTld: string = '',
