@@ -30,7 +30,6 @@ export class GifsComponent implements OnInit {
         this.gifService.searchGif(searchTerm)
             .subscribe(
                 (gifs: Gif[]) => {
-                    console.log(gifs);
                     this.gifs = gifs;
                 }
             );

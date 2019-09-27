@@ -17,9 +17,21 @@ export class ModalContainerComponent implements OnInit, OnDestroy {
 
     constructor(
         private modalService: NgbModal,
-        route: ActivatedRoute,
-        router: Router
+        private route: ActivatedRoute,
+        private router: Router
     ) {
+        this.modalBuilder(route, router);
+    }
+
+    ngOnInit(): void {
+    }
+
+    ngOnDestroy(): void {
+        console.log('modal-container-destroyed');
+        this.destroy.next();
+    }
+
+    private modalBuilder(route: ActivatedRoute, router: Router): void {
         route.params.pipe(
             takeUntil(this.destroy)
         )
@@ -27,7 +39,6 @@ export class ModalContainerComponent implements OnInit, OnDestroy {
                 (params) => {
 
                     // When router navigates on this component is takes the params and opens up the photo detail modal
-                    console.log('params', params);
                     this.currentDialog = this.modalService.open(GifDetailComponent, { centered: true });
                     this.currentDialog.componentInstance.gifId = params.id;
 
@@ -35,22 +46,14 @@ export class ModalContainerComponent implements OnInit, OnDestroy {
                     this.currentDialog.result
                         .then(
                             () => {
-                                router.navigateByUrl('/');
+                                router.navigate(['../'], { relativeTo: this.route });
                                 console.log('FLAG 1');
                             }, () => {
                                 console.log('FLAG 2');
-                                router.navigateByUrl('/');
+                                router.navigate(['../'], { relativeTo: this.route });
                             }
                         );
                 }
             );
     }
-
-    ngOnInit(): void {
-    }
-
-    ngOnDestroy(): void {
-        this.destroy.next();
-    }
-
 }

@@ -21,7 +21,6 @@ export class GifDetailComponent implements OnInit, OnChanges {
     }
 
     ngOnInit(): void {
-        console.log('this.gifId', this.gifId);
         if (this.gifId) { this.getGif(this.gifId); }
     }
 
@@ -29,7 +28,6 @@ export class GifDetailComponent implements OnInit, OnChanges {
         this.gifService.getGifById(gifId)
             .subscribe(
                 (gif: Gif) => {
-                    console.log(gif);
                     this.gif = gif;
                 }
             );
