@@ -28,6 +28,7 @@ export class GifDetailComponent implements OnInit, OnChanges {
         this.gifService.getGifById(gifId)
             .subscribe(
                 (gif: Gif) => {
+                    console.log(gif);
                     this.gif = gif;
                 }
             );

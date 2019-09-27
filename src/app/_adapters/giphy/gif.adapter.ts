@@ -26,10 +26,10 @@ export class GifAdapter implements Adapter<Gif> {
             item.user,
             item.source_tld,
             item.source_post_url,
-            item.update_datetime,
-            item.create_datetime,
-            item.import_datetime,
-            item.trending_datetime,
+            item.update_datetime ? new Date(item.update_datetime) : null,
+            item.create_datetime ? new Date(item.create_datetime) : null,
+            item.import_datetime ? new Date(item.import_datetime) : null,
+            item.trending_datetime ? new Date(item.trending_datetime) : null,
             this.imagesAdapter.adapt(item.images),
             item.title
         );
