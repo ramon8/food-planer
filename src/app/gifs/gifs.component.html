@@ -24,9 +24,11 @@
                     type="image/webp"> -->
                 <img [src]="gif.images.fixedHeight.webp"
                      alt="{{gif.title}}"
-                     [height]="gif.images.fixedHeight.height">
+                     [height]="gif.images.fixedHeight.height"
+                     [width]="gif.images.fixedHeight.width">
             </picture>
         </a>
     </div>
 
 </div>
+<router-outlet></router-outlet>

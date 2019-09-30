@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { GifService } from '@app/_services/gif.service';
 import { Gif } from '@app/_models';
@@ -9,7 +9,7 @@ import { environment } from '@env/environment';
     templateUrl: './gifs.component.html',
     styleUrls: ['./gifs.component.scss']
 })
-export class GifsComponent implements OnInit {
+export class GifsComponent implements OnInit, OnDestroy {
 
     searchTerm: string;
     gifs: Gif[];
@@ -18,6 +18,10 @@ export class GifsComponent implements OnInit {
 
     ngOnInit(): void {
         this.searchGif(environment.giphy.defaultSearch);
+    }
+
+    ngOnDestroy(): void {
+        console.log('gifs-component-destroyed');
     }
 
     // search input event handler

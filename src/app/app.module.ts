@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { RouteReuseStrategy } from '@angular/router';
 
 // modules
 import { AppRoutingModule } from './app-routing.module';
@@ -10,6 +11,7 @@ import { CoreModule } from './core/core.module';
 // components
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CustomReuseStrategy } from './shared/custom-reuse-strategy';
 
 @NgModule({
     declarations: [
@@ -23,7 +25,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         CoreModule,
         BrowserAnimationsModule,
     ],
-    providers: [],
+    providers: [
+        // { provide: RouteReuseStrategy, useClass: CustomReuseStrategy }
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

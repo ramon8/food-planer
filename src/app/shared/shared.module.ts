@@ -8,8 +8,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // components
 import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { FormConfiguratorComponent } from './components/form-configurator/form-configurator.component';
 import { HidePipe } from '@app/_pipes/hide.pipe';
-import { FormConfiguratorComponent } from './form-configurator/form-configurator.component';
 
 @NgModule({
     declarations: [

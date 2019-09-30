@@ -46,11 +46,13 @@ export class ModalContainerComponent implements OnInit, OnDestroy {
                     this.currentDialog.result
                         .then(
                             () => {
-                                router.navigate(['../'], { relativeTo: this.route });
+                                router.navigate(['gifs']);
+                                // router.navigate(['../'], { relativeTo: this.route });
                                 console.log('FLAG 1');
                             }, () => {
                                 console.log('FLAG 2');
-                                router.navigate(['../'], { relativeTo: this.route });
+                                router.navigate(['gifs']);
+                                // router.navigate(['../'], { relativeTo: this.route });
                             }
                         );
                 }

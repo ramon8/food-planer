@@ -5,8 +5,11 @@ import { GifsComponent } from './gifs.component';
 import { ModalContainerComponent } from './components/modal-container/modal-container.component';
 
 const routes: Routes = [
-    { path: '', component: GifsComponent },
-    { path: ':id', component: ModalContainerComponent }
+    {
+        path: '', component: GifsComponent, children: [
+            { path: ':id', component: ModalContainerComponent },
+        ]
+    }
 ];
 
 @NgModule({

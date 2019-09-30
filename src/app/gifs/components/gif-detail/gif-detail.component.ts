@@ -8,20 +8,15 @@ import { GifService } from '@app/_services/gif.service';
     templateUrl: './gif-detail.component.html',
     styleUrls: ['./gif-detail.component.scss']
 })
-export class GifDetailComponent implements OnInit, OnChanges {
+export class GifDetailComponent implements OnInit {
 
     @Input() gifId: string;
     gif: Gif;
 
     constructor(private gifService: GifService) { }
 
-    ngOnChanges(changes: SimpleChanges): void {
-        console.log(changes);
-        // if (changes) { this.getGif(changes.currentValue.gifId); }
-    }
-
     ngOnInit(): void {
-        if (this.gifId) { this.getGif(this.gifId); }
+        this.getGif(this.gifId);
     }
 
     private getGif(gifId: string): void {
