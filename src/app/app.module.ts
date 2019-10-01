@@ -11,7 +11,7 @@ import { CoreModule } from './core/core.module';
 // components
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CustomReuseStrategy } from './shared/custom-reuse-strategy';
+// import { CustomReuseStrategy } from './shared/custom-reuse-strategy';
 
 @NgModule({
     declarations: [
@@ -25,9 +25,10 @@ import { CustomReuseStrategy } from './shared/custom-reuse-strategy';
         CoreModule,
         BrowserAnimationsModule,
     ],
-    providers: [
-        // { provide: RouteReuseStrategy, useClass: CustomReuseStrategy }
-    ],
+    // TODO: not working properly with feature modules and gif modal
+    // providers: [
+    //     { provide: RouteReuseStrategy, useClass: CustomReuseStrategy }
+    // ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
